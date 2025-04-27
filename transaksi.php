@@ -15,6 +15,10 @@ if (!$result_produk) {
     die("Error fetching products: " . mysqli_error($koneksi));
 }
 
+// Ambil daftar kategori
+$query_kategori = "SELECT * FROM kategori";
+$result_kategori = mysqli_query($koneksi, $query_kategori);
+
 // Menambahkan produk ke keranjang
 if (isset($_POST['tambah_ke_keranjang'])) {
     $produk_id = (int) ($_POST['produk_id'] ?? 0);
@@ -65,6 +69,28 @@ if (isset($_POST['tambah_ke_keranjang'])) {
     echo "<script>alert('Produk berhasil ditambahkan ke keranjang!'); window.location='transaksi.php';</script>";
 }
 
+// Fungsi untuk menambahkan produk berdasarkan kategori
+if (isset($_POST['tambah_kategori'])) {
+    $kategori_id = $_POST['kategori_id'];
+    
+    // Ambil semua produk dalam kategori
+    $query_produk_kategori = "SELECT * FROM produk WHERE kategori_id = $kategori_id";
+    $result_produk_kategori = mysqli_query($koneksi, $query_produk_kategori);
+    
+    while ($produk = mysqli_fetch_assoc($result_produk_kategori)) {
+        $subtotal = $produk['harga'] * 1; // Default jumlah 1
+        
+        // Tambahkan ke keranjang
+        $_SESSION['keranjang'][] = [
+            'id' => $produk['id'],
+            'nama' => $produk['nama_produk'],
+            'harga' => $produk['harga'],
+            'jumlah' => 1,
+            'subtotal' => $subtotal
+        ];
+    }
+}
+
 // Hitung total harga
 $total_harga = array_sum(array_column($_SESSION['keranjang'], 'subtotal'));
 ?>
@@ -79,6 +105,30 @@ $total_harga = array_sum(array_column($_SESSION['keranjang'], 'subtotal'));
 <body>
     <div class="container mt-5">
         <h3>Transaksi</h3>
+
+        <!-- Panel Preset Kategori -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>Preset Kategori</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="" class="row g-3">
+                    <div class="col-auto">
+                        <select name="kategori_id" class="form-select" required>
+                            <option value="">Pilih Kategori</option>
+                            <?php while ($kategori = mysqli_fetch_assoc($result_kategori)): ?>
+                                <option value="<?= $kategori['id'] ?>"><?= $kategori['nama_kategori'] ?></option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" name="tambah_kategori" class="btn btn-primary">
+                            Tambahkan Semua Produk Kategori
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <!-- Daftar Produk -->
         <h4>Daftar Produk</h4>

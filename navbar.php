@@ -73,6 +73,11 @@ if (session_status() == PHP_SESSION_NONE) {
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="manage_kategori.php">
+                        <i class="bi bi-basket"></i> Kelola Kategori
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-danger" href="logout.php">
                         <i class="bi bi-box-arrow-right"></i> Keluar
                     </a>

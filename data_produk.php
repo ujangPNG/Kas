@@ -98,14 +98,17 @@ if (isset($_GET['hapus_produk'])) {
                     <th>Nama Produk</th>
                     <th>Harga</th>
                     <th>Stok</th>
+                    <th>Kategori</th>
                     <th>Gambar</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                // Query untuk mengambil semua data produk
-                $query = mysqli_query($koneksi, "SELECT * FROM produk");
+                // Query untuk mengambil semua data produk dengan nama kategori
+                $query = mysqli_query($koneksi, "SELECT p.*, k.nama_kategori 
+                                               FROM produk p 
+                                               LEFT JOIN kategori k ON p.kategori_id = k.id");
                 $no = 1;
 
                 // Cek apakah ada data produk
@@ -114,13 +117,23 @@ if (isset($_GET['hapus_produk'])) {
                         // Pastikan gambar ada, jika tidak gunakan gambar default
                         $gambar = !empty($row['gambar']) ? "assets/{$row['gambar']}" : "assets/default.jpg";
                         
+                        // Tentukan nama kategori yang akan ditampilkan
+                        $kategori = !empty($row['nama_kategori']) ? $row['nama_kategori'] : "Tidak Berkategori";
+                        
                         echo "<tr>
                             <td>{$no}</td>
                             <td>{$row['kode_produk']}</td>
                             <td>{$row['nama_produk']}</td>
                             <td>Rp " . number_format($row['harga'], 0, ',', '.') . "</td>
                             <td>{$row['stok']}</td>
-                            <td><img src='{$gambar}' width='50' alt='Gambar {$row['nama_produk']}'></td>
+                            <td>{$kategori}</td>
+                            <td>";
+                            if (!empty($row['gambar']) && file_exists("assets/" . $row['gambar'])) {
+                                echo "<img src='assets/{$row['gambar']}' width='50' alt='Gambar {$row['nama_produk']}'>";
+                            } else {
+                                echo "Tidak ada gambar";
+                            }
+                        echo "</td>
                             <td>
                                 <a href='edit_produk.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
                                 <a href='data_produk.php?hapus_produk={$row['id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Yakin ingin memindahkan produk ini ke keranjang dan menghapusnya?\")'>Hapus dan Pindah ke Keranjang</a>
@@ -129,7 +142,7 @@ if (isset($_GET['hapus_produk'])) {
                         $no++;
                     }
                 } else {
-                    echo "<tr><td colspan='7' class='text-center'>Data produk masih kosong</td></tr>";
+                    echo "<tr><td colspan='8' class='text-center'>Data produk masih kosong</td></tr>";
                 }
                 ?>
             </tbody>
