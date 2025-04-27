@@ -1,6 +1,6 @@
 <div class="navbar navbar-dark bg-dark p-3">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <span class="navbar-brand mb-0 h5 text-warning">TOKO BERKAH SELALU</span>
+    <a href="dashboard.php" class="navbar-brand mb-0 h5 text-warning">TOKO BERKAH SELALU</a>
     <div>
         <a href="transaksi.php" class="text-white mx-2"><i class="bi bi-display"></i> Transaksi</a>
         <a href="data_produk.php" class="text-white mx-2"><i class="bi bi-bag"></i> Data Produk</a>
