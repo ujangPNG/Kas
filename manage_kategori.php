@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include 'init.php';
 
 // Tambah kategori baru
 if (isset($_POST['tambah'])) {

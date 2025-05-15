@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'koneksi.php';
+include 'init.php';
 
 // Hapus transaksi
 if (isset($_GET['hapus'])) {

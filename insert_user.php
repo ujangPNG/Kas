@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php'; // Koneksi ke database
+include 'init.php';
 
 // Hash password di PHP (bukan di SQL!)
 $password1 = password_hash('123456', PASSWORD_DEFAULT);

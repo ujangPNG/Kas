@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include 'init.php';
 include 'navbar.php';
 
 

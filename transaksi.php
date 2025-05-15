@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'koneksi.php';
+include 'init.php';
 
 // Pastikan session keranjang sudah ada dan berbentuk array
 if (!isset($_SESSION['keranjang']) || !is_array($_SESSION['keranjang'])) {

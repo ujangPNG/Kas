@@ -1,6 +1,5 @@
 <?php
-session_start();
-include 'koneksi.php';
+include 'init.php';
 
 // Cek jika keranjang ada dan memiliki produk
 if (isset($_SESSION['keranjang']) && !empty($_SESSION['keranjang'])) {

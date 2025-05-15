@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'koneksi.php';
+include 'init.php';
 
 if (!isset($_GET['id'])) {
     die("Transaksi tidak ditemukan.");

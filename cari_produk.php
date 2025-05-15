@@ -1,6 +1,5 @@
 <?php
-session_start();
-include 'koneksi.php';
+include 'init.php';
 
 // Inisialisasi keranjang jika belum ada
 if (!isset($_SESSION['keranjang'])) {

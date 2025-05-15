@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include 'init.php';
 
 // Ambil data pengaturan dari database
 $query = mysqli_query($koneksi, "SELECT * FROM pengaturan WHERE id=1");

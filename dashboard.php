@@ -1,4 +1,6 @@
-<?php include 'koneksi.php'; ?>
+<?php 
+include 'init.php';
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>

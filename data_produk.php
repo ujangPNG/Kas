@@ -1,7 +1,6 @@
 <?php
-include 'koneksi.php';
+include 'init.php';
 
-// Periksa apakah koneksi ke database berhasil
 if (!$koneksi) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }

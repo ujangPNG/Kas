@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include 'init.php';
 
 // Ambil data pengaturan
 $query = mysqli_query($koneksi, "SELECT * FROM pengaturan LIMIT 1");

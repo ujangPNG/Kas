@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'koneksi.php';
+include 'init.php';
 
 if (!isset($_SESSION['keranjang']) || empty($_SESSION['keranjang'])) {
     echo "<script>alert('Keranjang masih kosong!'); window.location='transaksi.php';</script>";
