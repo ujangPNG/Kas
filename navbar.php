@@ -46,7 +46,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container-fluid d-flex justify-content-between align-items-center">
-        <a class="navbar-brand" href="#">TOKO BERKAH SELALU</a>
+        <a class="navbar-brand" href="dashboard.php">TOKO BERKAH SELALU</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>

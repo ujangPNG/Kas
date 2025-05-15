@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama_produk = $_POST['nama_produk'];
     $harga = $_POST['harga'];
     $stok = $_POST['stok'];
-    $kategori_id = $_POST['kategori'];
+    $kategori_id = !empty($_POST['kategori']) ? $_POST['kategori'] : null;
     
     // Upload gambar dengan penanganan lebih baik
     if(isset($_FILES['gambar']) && $_FILES['gambar']['error'] == 0) {
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $query = "INSERT INTO produk (kode_produk, nama_produk, harga, stok, gambar, kategori_id) 
-              VALUES ('$kode_produk', '$nama_produk', '$harga', '$stok', '$gambar', '$kategori_id')";
+              VALUES ('$kode_produk', '$nama_produk', '$harga', '$stok', '$gambar', " . ($kategori_id ? "'$kategori_id'" : "NULL") . ")";
     
     if (mysqli_query($koneksi, $query)) {
         header("Location: data_produk.php");
@@ -79,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="number" name="stok" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label>Kategori</label>
-                <select name="kategori" class="form-control" required>
+                <label>Kategori (Opsional)</label>
+                <select name="kategori" class="form-control">
                     <option value="">Pilih Kategori</option>
                     <?php while ($kategori = mysqli_fetch_assoc($result_kategori)): ?>
                         <option value="<?= $kategori['id'] ?>"><?= $kategori['nama_kategori'] ?></option>
