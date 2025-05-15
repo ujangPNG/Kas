@@ -1,5 +1,4 @@
 <?php
-// Menampilkan produk dalam keranjang
 foreach ($_SESSION['keranjang'] as $produk) {
     echo "<div>";
     echo "<p>{$produk['nama_produk']}</p>";
