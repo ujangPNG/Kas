@@ -8,9 +8,10 @@ include 'init.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Kasir</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="custom_style.php">
     <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body class="with-navbar-padding">
 
 <?php include 'navbar.php'; ?>
 

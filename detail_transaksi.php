@@ -44,6 +44,7 @@ $result_detail = mysqli_query($koneksi, $query_detail);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Transaksi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom_style.php">
     <style>
         /* Media print untuk tampilan cetak */
         @media print {
@@ -53,7 +54,7 @@ $result_detail = mysqli_query($koneksi, $query_detail);
         }
     </style>
 </head>
-<body>
+<body class="with-navbar-padding">
     <div class="container mt-5">
         <h3>Detail Transaksi - <?= $transaksi['kode_transaksi']; ?></h3>
 

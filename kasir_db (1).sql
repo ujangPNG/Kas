@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2025 at 01:31 PM
+-- Generation Time: May 17, 2025 at 05:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,7 +47,15 @@ INSERT INTO `detail_transaksi` (`id`, `transaksi_id`, `produk_id`, `jumlah`, `su
 (32, 19, 14, 1, 15000),
 (33, 19, 13, 1, 10000),
 (34, 19, 14, 1, 15000),
-(35, 19, 15, 1, 1000);
+(35, 19, 15, 1, 1000),
+(36, 20, 13, 3, 30000),
+(37, 20, 14, 4, 60000),
+(38, 20, 20, 4, 48000),
+(39, 20, 15, 2, 2000),
+(40, 20, 18, 6, 240000),
+(41, 21, 13, 4, 40000),
+(42, 21, 14, 4, 60000),
+(43, 21, 20, 4, 48000);
 
 -- --------------------------------------------------------
 
@@ -80,15 +88,18 @@ CREATE TABLE `pengaturan` (
   `nama_toko` varchar(100) NOT NULL,
   `logo` varchar(255) DEFAULT NULL,
   `alamat` text NOT NULL,
-  `kontak` varchar(50) NOT NULL
+  `kontak` varchar(50) NOT NULL,
+  `background_color` varchar(20) DEFAULT '#f8f9fa',
+  `font_family` varchar(100) DEFAULT 'Arial, sans-serif',
+  `font_color` varchar(20) DEFAULT '#212529'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pengaturan`
 --
 
-INSERT INTO `pengaturan` (`id`, `nama_toko`, `logo`, `alamat`, `kontak`) VALUES
-(1, 'toko deel', 'uploads/Screenshot 2025-03-16 103642.png', 'Jl. Contoh No. 123, Kota', '081234567890');
+INSERT INTO `pengaturan` (`id`, `nama_toko`, `logo`, `alamat`, `kontak`, `background_color`, `font_family`, `font_color`) VALUES
+(1, 'toko deel', 'uploads/Screenshot 2025-03-16 103642.png', 'Jl. Contoh No. 123, Kota', '081234567890', '#f8f9fa', 'Arial, sans-serif', '#212529');
 
 -- --------------------------------------------------------
 
@@ -132,11 +143,11 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id`, `kode_produk`, `nama_produk`, `harga`, `stok`, `gambar`, `kategori_id`) VALUES
-(13, 'sbn', 'sabun', 10000, 196, 'download.jpeg', 1),
-(14, 'spo', 'sampo', 15000, 197, '20250427125059_HeadShouldersShampooLemonFreshSampo1_199ff2a3-8748-42a3-b402-b21dace37a00_900x897.jpg', 1),
-(15, 'rco', 'royco', 1000, 198, '20250427125210_Royco Bumbu Pelezat Rasa Ayam 460g.jpg', 2),
-(18, 'ikan', 'ikan enak nyam nyam', 40000, 200, 'Ikan-Kerapu.jpg', NULL),
-(20, 'sik', 'sikat', 12000, 200, '20250515075802_R.jpg', 1);
+(13, 'sbn', 'sabun', 10000, 189, 'download.jpeg', 1),
+(14, 'spo', 'sampo', 15000, 189, '20250427125059_HeadShouldersShampooLemonFreshSampo1_199ff2a3-8748-42a3-b402-b21dace37a00_900x897.jpg', 1),
+(15, 'rco', 'royco', 1000, 196, '20250427125210_Royco Bumbu Pelezat Rasa Ayam 460g.jpg', 2),
+(18, 'ikan', 'ikan enak nyam nyam', 40000, 194, 'Ikan-Kerapu.jpg', NULL),
+(20, 'sik', 'sikat', 12000, 192, '20250515075802_R.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -159,7 +170,9 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id`, `kode_transaksi`, `nama_pelanggan`, `total_harga`, `tanggal`, `id_pelanggan`, `id_operator`) VALUES
-(19, 'TRX-20250427-0001', 'aa', 87000, '2025-04-27 05:53:36', NULL, NULL);
+(19, 'TRX-20250427-0001', 'aa', 87000, '2025-04-27 05:53:36', NULL, NULL),
+(20, 'TRX-20250517-0020', 'yamyamg', 380000, '2025-05-17 06:52:04', NULL, NULL),
+(21, 'TRX-20250517-0021', 'dani', 148000, '2025-05-17 07:02:24', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -217,7 +230,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -247,7 +260,7 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables

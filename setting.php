@@ -10,7 +10,10 @@ if (isset($_POST['simpan'])) {
     $nama_toko = $_POST['nama_toko'];
     $alamat = $_POST['alamat'];
     $kontak = $_POST['kontak'];
-    $logo = $pengaturan['logo_toko'];
+    $logo = $pengaturan['logo'];
+    $background_color = isset($_POST['background_color']) ? $_POST['background_color'] : $pengaturan['background_color'];
+    $font_family = isset($_POST['font_family']) ? $_POST['font_family'] : $pengaturan['font_family'];
+    $font_color = isset($_POST['font_color']) ? $_POST['font_color'] : $pengaturan['font_color'];
 
     // Jika ada upload logo baru
     if (!empty($_FILES['logo']['name'])) {
@@ -20,7 +23,7 @@ if (isset($_POST['simpan'])) {
     }
 
     // Update database
-    mysqli_query($koneksi, "UPDATE pengaturan SET nama_toko='$nama_toko', logo_toko='$logo', alamat='$alamat', kontak='$kontak' WHERE id=1");
+    mysqli_query($koneksi, "UPDATE pengaturan SET nama_toko='$nama_toko', logo='$logo', alamat='$alamat', kontak='$kontak', background_color='$background_color', font_family='$font_family', font_color='$font_color' WHERE id=1");
 
     echo "<script>alert('Pengaturan berhasil diperbarui!'); window.location='setting.php';</script>";
 }
@@ -44,7 +47,7 @@ if (isset($_POST['simpan'])) {
             </div>
             <div class="mb-3">
                 <label>Logo Toko</label><br>
-                <img src="uploads/<?= $pengaturan['logo_toko']; ?>" width="100"><br>
+                <img src="uploads/<?= $pengaturan['logo']; ?>" width="100"><br>
                 <input type="file" name="logo" class="form-control">
             </div>
             <div class="mb-3">
@@ -54,6 +57,18 @@ if (isset($_POST['simpan'])) {
             <div class="mb-3">
                 <label>Kontak</label>
                 <input type="text" name="kontak" class="form-control" value="<?= $pengaturan['kontak']; ?>">
+            </div>
+            <div class="mb-3">
+                <label>Warna Background</label>
+                <input type="color" name="background_color" class="form-control form-control-color" value="<?= htmlspecialchars($pengaturan['background_color']); ?>">
+            </div>
+            <div class="mb-3">
+                <label>Font Family</label>
+                <input type="text" name="font_family" class="form-control" value="<?= htmlspecialchars($pengaturan['font_family']); ?>" placeholder="Contoh: Arial, sans-serif">
+            </div>
+            <div class="mb-3">
+                <label>Warna Font</label>
+                <input type="color" name="font_color" class="form-control form-control-color" value="<?= htmlspecialchars($pengaturan['font_color']); ?>">
             </div>
             <button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
         </form>

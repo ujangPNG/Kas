@@ -12,33 +12,58 @@ if (session_status() == PHP_SESSION_NONE) {
     <title>Navbar - Kasir</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="custom_style.php">
+    <script>
+    (function() {
+        function getCookie(name) {
+            let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? decodeURIComponent(match[2]) : null;
+        }
+        var bg = getCookie('theme_bg');
+        var font = getCookie('theme_font');
+        var fontcolor = getCookie('theme_fontcolor');
+        var btncolor = getCookie('theme_btncolor');
+        if(bg) document.documentElement.style.setProperty('--bg-color', bg);
+        if(font) document.documentElement.style.setProperty('--main-font', font);
+        if(fontcolor) document.documentElement.style.setProperty('--font-color', fontcolor);
+        if(btncolor) document.documentElement.style.setProperty('--btn-color', btncolor);
+    })();
+    </script>
     <style>
+        /* Remove most inline navbar styles, now handled in style.css */
         .navbar {
-            background-color: #343a40; /* Warna navbar */
-            padding: 10px 20px;
+            /* background: linear-gradient(90deg, #2563eb 70%, #ff9800 100%) !important; */
+            /* box-shadow: 0 2px 12px rgba(37,99,235,0.07); */
+            border-bottom: 2px solid #ff9800;
+            min-height: 64px;
         }
         .navbar-brand {
-            color: #ffc107 !important;
-            font-weight: bold;
+            /* color: #fff !important; */
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
         }
         .nav-link {
-            color: white !important;
-            margin-right: 15px;
+            /* color: #fff !important; */
+            font-size: 1.08rem;
+            padding: 8px 18px !important;
+            border-radius: 8px;
+            margin-right: 8px;
         }
-        .nav-link:hover {
-            color: #ffc107 !important;
+        .nav-link.active, .nav-link:focus {
+            background: #e3f0ff;
+            color: #2563eb !important;
         }
-        .nav-link.text-danger:hover {
-            color: red !important;
+        .navbar-toggler {
+            border: none;
         }
-        .fixed-top {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+        .navbar-toggler:focus {
+            box-shadow: none;
         }
         body {
-            padding-top: 60px; /* Supaya konten tidak tertutup navbar */
+            padding-top: 70px;
         }
     </style>
 </head>

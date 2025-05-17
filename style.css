@@ -1,5 +1,17 @@
+:root {
+    --primary-color: #2563eb;
+    --accent-color: #ff9800;
+    --bg-color: #f4f8ff;
+    --btn-color: #2563eb;
+    --table-color: #2563eb;
+    --main-font: 'Segoe UI', Arial, sans-serif;
+    --font-color: #222;
+}
+
 body {
-    background: #e3e3e3;
+    background: var(--bg-color) !important;
+    font-family: var(--main-font) !important;
+    color: var(--font-color) !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,41 +19,242 @@ body {
 }
 
 .login-container {
-    background: #4e6ef2;
-    padding: 20px;
-    border-radius: 10px;
+    background: #fff;
+    padding: 32px 28px 28px 28px;
+    border-radius: 18px;
     text-align: center;
-    width: 300px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 340px;
+    box-shadow: 0 6px 32px rgba(30, 60, 120, 0.10), 0 1.5px 4px rgba(255, 140, 0, 0.08);
+    border: 2px solid var(--primary-color);
+    font-family: var(--main-font) !important;
 }
 
 h2 {
-    color: white;
+    color: var(--primary-color);
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .highlight {
-    color: yellow;
+    color: var(--accent-color);
     font-weight: bold;
 }
 
 .profile-img {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 2px 8px rgba(37,99,235,0.08);
 }
 
 input {
     width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    padding: 12px;
+    margin: 7px 0;
+    border-radius: 8px;
+    border: 2px solid #b6c6e3;
+    background: #f8fafc;
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+input:focus {
+    border: 2px solid var(--primary-color);
+    outline: none;
+    background: #fff;
 }
 
-button {
+button, .btn, .btn-primary {
+    background: var(--btn-color) !important;
+    color: #fff !important;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(37,99,235,0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+button.btn-secondary, .btn-secondary {
+    background: #fff !important;
+    color: var(--btn-color) !important;
+    border: 2px solid var(--btn-color) !important;
+}
+button.btn-secondary:hover, .btn-secondary:hover {
+    background: var(--bg-color) !important;
+    color: var(--accent-color) !important;
+    border: 2px solid var(--accent-color) !important;
+}
+button:hover, .btn-primary:hover, .btn:hover {
+    background: var(--accent-color) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 16px rgba(255,152,0,0.10);
+}
+
+.alert {
+    border-radius: 8px;
+    font-size: 0.98rem;
+}
+
+/* Card and Table Modernization */
+.card {
+    border-radius: 16px !important;
+    box-shadow: 0 2px 12px rgba(37,99,235,0.07);
+    border: 2px solid var(--primary-color);
+    font-family: var(--main-font) !important;
+}
+.card.bg-warning {
+    background: var(--accent-color) !important;
+    color: #fff !important;
+}
+.card.bg-success {
+    background: var(--primary-color) !important;
+    color: #fff !important;
+}
+.card.bg-primary {
+    background: var(--primary-color) !important;
+    color: #fff !important;
+}
+.table {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(255,152,0,0.06);
+    border: 1.5px solid var(--primary-color);
+    font-family: var(--main-font) !important;
+}
+.table thead th, .table thead td {
+    background: var(--table-color) !important;
+    color: #fff !important;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f3f8ff;
+}
+
+/* Navbar Modernization (for inline style in navbar.php) */
+.navbar {
+    background: var(--primary-color) !important;
+    box-shadow: 0 2px 12px rgba(37,99,235,0.07);
+    border-bottom: 3px solid var(--accent-color);
+}
+.navbar-brand {
+    color: #fff !important;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.nav-link {
+    color: #fff !important;
+    margin-right: 15px;
+    font-weight: 500;
+    transition: color 0.2s, background 0.2s;
+}
+.nav-link:hover, .nav-link.active, .nav-link:focus {
+    color: #fff !important;
+    background: var(--accent-color) !important;
+}
+.nav-link.text-danger:hover {
+    color: #d32f2f !important;
+    background: #fff !important;
+}
+
+/* General spacing for main content */
+.main-content {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 24px 0;
+    font-family: var(--main-font) !important;
+}
+
+/* Color Customizer UI */
+.color-customizer {
+    background: #fff;
+    border: 2px solid var(--primary-color);
+    border-radius: 14px;
+    padding: 18px 20px 14px 20px;
+    margin: 24px auto 0 auto;
+    max-width: 400px;
+    box-shadow: 0 2px 12px rgba(37,99,235,0.07);
+    font-family: var(--main-font) !important;
+}
+.color-customizer label {
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+.color-customizer input[type="color"] {
+    border: none;
+    width: 36px;
+    height: 36px;
+    background: none;
+    margin-right: 12px;
+    cursor: pointer;
+}
+.color-preview {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 2px solid #eee;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+.color-customizer button {
+    margin-top: 12px;
     width: 100%;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
     padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+.color-customizer button:hover {
+    background: var(--accent-color);
+}
+
+.with-navbar-padding {
+    padding-top: 90px !important;
+}
+@media (max-width: 991.98px) {
+    .with-navbar-padding {
+        padding-top: 110px !important;
+    }
+}
+
+.table-container {
+    max-height: 400px; /* Sesuaikan tinggi sesuai kebutuhan */
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.date-filter-form {
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1.5px solid var(--primary-color);
+    box-shadow: 0 1px 6px rgba(255,152,0,0.06);
+}
+.date-filter-form label {
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+.date-filter-form input[type="date"] {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1.5px solid #b6c6e3;
+    margin-right: 10px;
+}
+.date-filter-form button {
+    padding: 8px 15px;
 }

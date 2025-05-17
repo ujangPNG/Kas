@@ -155,6 +155,7 @@ while ($kategori = mysqli_fetch_assoc($result_kategori_list)) {
     <meta charset="UTF-8">
     <title>Transaksi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="custom_style.php">
     <style>
         .scrollable-content {
             height: 400px;
@@ -206,7 +207,7 @@ while ($kategori = mysqli_fetch_assoc($result_kategori_list)) {
         }
     </script>
 </head>
-<body>
+<body class="with-navbar-padding">
     <?php include 'navbar.php'; ?>
     <div class="container mt-5 mb-5">
         <h3>Transaksi</h3>

@@ -66,8 +66,9 @@ if (isset($_GET['hapus_produk'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Produk</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="custom_style.php">
 </head>
-<body>
+<body class="with-navbar-padding">
     <div class="container mt-5">
         <h2>Data Produk</h2>
 
