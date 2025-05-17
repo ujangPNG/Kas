@@ -182,7 +182,29 @@ while ($kategori = mysqli_fetch_assoc($result_kategori_list)) {
             text-align: center;
             margin: 0 5px;
         }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #print-area, #print-area * {
+                visibility: visible;
+            }
+            #print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
     </style>
+    <script>
+        function printKeranjang() {
+            window.print();
+        }
+    </script>
 </head>
 <body>
     <?php include 'navbar.php'; ?>
@@ -287,46 +309,50 @@ while ($kategori = mysqli_fetch_assoc($result_kategori_list)) {
             </div>
         </div>
         
-        <!-- Keranjang Belanja -->
-        <h4>Keranjang Belanja</h4>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Nama Produk</th>
-                    <th>Harga</th>
-                    <th>Jumlah</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (!empty($_SESSION['keranjang'])): ?>
-                    <?php foreach ($_SESSION['keranjang'] as $index => $produk): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($produk['nama']); ?></td>
-                            <td>Rp <?= number_format($produk['harga'], 0, ',', '.'); ?></td>
-                            <td>
-                                <form method="POST" action="" class="quantity-control">
-                                    <input type="hidden" name="index" value="<?= $index; ?>">
-                                    <div class="d-flex align-items-center">
-                                        <button type="submit" name="update_jumlah" class="btn btn-outline-danger btn-sm" onclick="document.getElementById('qty_<?= $index; ?>').value--;">-</button>
-                                        <input type="number" id="qty_<?= $index; ?>" name="jumlah" value="<?= $produk['jumlah']; ?>" min="0" class="form-control mx-2" style="width: 70px;" onChange="this.form.submit()">
-                                        <button type="submit" name="update_jumlah" class="btn btn-outline-success btn-sm" onclick="document.getElementById('qty_<?= $index; ?>').value++;">+</button>
-                                    </div>
-                                </form>
-                            </td>
-                            <td>Rp <?= number_format($produk['subtotal'], 0, ',', '.'); ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr><td colspan="4" class="text-center">Keranjang kosong</td></tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-
-        <!-- Total Harga -->
-        <div class="mt-4">
-            <strong>Total Harga:</strong>
-            <span class="text-white bg-dark p-2 rounded">Rp <?= number_format($total_harga, 0, ',', '.'); ?></span>
+        <!-- Keranjang Belanja dengan Area Cetak -->
+        <div id="print-area">
+            <h4>Keranjang Belanja</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nama Produk</th>
+                        <th>Harga</th>
+                        <th class="no-print">Jumlah</th>
+                        <th>Jumlah</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($_SESSION['keranjang'])): ?>
+                        <?php foreach ($_SESSION['keranjang'] as $index => $produk): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($produk['nama']); ?></td>
+                                <td>Rp <?= number_format($produk['harga'], 0, ',', '.'); ?></td>
+                                <td class="no-print">
+                                    <form method="POST" action="" class="quantity-control">
+                                        <input type="hidden" name="index" value="<?= $index; ?>">
+                                        <div class="d-flex align-items-center">
+                                            <button type="submit" name="update_jumlah" class="btn btn-outline-danger btn-sm" onclick="document.getElementById('qty_<?= $index; ?>').value--;">-</button>
+                                            <input type="number" id="qty_<?= $index; ?>" name="jumlah" value="<?= $produk['jumlah']; ?>" min="0" class="form-control mx-2" style="width: 70px;" onChange="this.form.submit()">
+                                            <button type="submit" name="update_jumlah" class="btn btn-outline-success btn-sm" onclick="document.getElementById('qty_<?= $index; ?>').value++;">+</button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td><?= $produk['jumlah']; ?></td>
+                                <td>Rp <?= number_format($produk['subtotal'], 0, ',', '.'); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr><td colspan="5" class="text-center">Keranjang kosong</td></tr>
+                    <?php endif; ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-end"><strong>Total Harga:</strong></td>
+                        <td><strong>Rp <?= number_format($total_harga, 0, ',', '.'); ?></strong></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
 
         <!-- Form Simpan Transaksi -->
@@ -339,7 +365,7 @@ while ($kategori = mysqli_fetch_assoc($result_kategori_list)) {
         </form>
 
         <!-- Tombol Cetak & Dashboard -->
-        <button class="btn btn-success mt-3" onclick="window.print()">Cetak Transaksi</button>
+        <button class="btn btn-success mt-3" onclick="printKeranjang()">Cetak Transaksi</button>
         <a href="dashboard.php" class="btn btn-secondary mt-3">Kembali ke Dashboard</a>
     </div>
 </body>
