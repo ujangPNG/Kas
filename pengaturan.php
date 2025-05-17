@@ -45,7 +45,7 @@ if (isset($_POST['update'])) {
 <?php include 'navbar.php'; ?>
 
 
-<div class="container mt-4">
+<div class="container mt-4 mb-4">
     <h3>Pengaturan Toko</h3>
 
     <form method="POST" enctype="multipart/form-data">
