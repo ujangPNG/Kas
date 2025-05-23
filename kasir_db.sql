@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Bulan Mei 2025 pada 04.37
+-- Waktu pembuatan: 20 Bulan Mei 2025 pada 04.47
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `kasir_db`
 --
-CREATE DATABASE IF NOT EXISTS `kasir_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `kasir_db`;
 
 -- --------------------------------------------------------
 
@@ -29,17 +27,13 @@ USE `kasir_db`;
 -- Struktur dari tabel `detail_transaksi`
 --
 
-DROP TABLE IF EXISTS `detail_transaksi`;
-CREATE TABLE IF NOT EXISTS `detail_transaksi` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `detail_transaksi` (
+  `id` int(11) NOT NULL,
   `transaksi_id` int(11) DEFAULT NULL,
   `produk_id` int(11) DEFAULT NULL,
   `jumlah` int(11) DEFAULT NULL,
-  `subtotal` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `transaksi_id` (`transaksi_id`),
-  KEY `detail_transaksi_ibfk_2` (`produk_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `subtotal` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `detail_transaksi`
@@ -69,13 +63,11 @@ INSERT INTO `detail_transaksi` (`id`, `transaksi_id`, `produk_id`, `jumlah`, `su
 -- Struktur dari tabel `kategori`
 --
 
-DROP TABLE IF EXISTS `kategori`;
-CREATE TABLE IF NOT EXISTS `kategori` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `kategori` (
+  `id` int(11) NOT NULL,
   `nama_kategori` varchar(50) NOT NULL,
-  `ikon` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `ikon` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `kategori`
@@ -91,18 +83,16 @@ INSERT INTO `kategori` (`id`, `nama_kategori`, `ikon`) VALUES
 -- Struktur dari tabel `pengaturan`
 --
 
-DROP TABLE IF EXISTS `pengaturan`;
-CREATE TABLE IF NOT EXISTS `pengaturan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pengaturan` (
+  `id` int(11) NOT NULL,
   `nama_toko` varchar(100) NOT NULL,
   `logo` varchar(255) DEFAULT NULL,
   `alamat` text NOT NULL,
   `kontak` varchar(50) NOT NULL,
   `background_color` varchar(20) DEFAULT '#f8f9fa',
   `font_family` varchar(100) DEFAULT 'Arial, sans-serif',
-  `font_color` varchar(20) DEFAULT '#212529',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `font_color` varchar(20) DEFAULT '#212529'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `pengaturan`
@@ -117,15 +107,12 @@ INSERT INTO `pengaturan` (`id`, `nama_toko`, `logo`, `alamat`, `kontak`, `backgr
 -- Struktur dari tabel `pengguna`
 --
 
-DROP TABLE IF EXISTS `pengguna`;
-CREATE TABLE IF NOT EXISTS `pengguna` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `pengguna` (
+  `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `nama` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `pengguna`
@@ -141,19 +128,15 @@ INSERT INTO `pengguna` (`id`, `username`, `password`, `nama`) VALUES
 -- Struktur dari tabel `produk`
 --
 
-DROP TABLE IF EXISTS `produk`;
-CREATE TABLE IF NOT EXISTS `produk` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `produk` (
+  `id` int(11) NOT NULL,
   `kode_produk` varchar(50) NOT NULL,
   `nama_produk` varchar(100) NOT NULL,
   `harga` int(11) NOT NULL,
   `stok` int(11) NOT NULL,
   `gambar` varchar(255) DEFAULT NULL,
-  `kategori_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `kode_produk` (`kode_produk`),
-  KEY `fk_kategori` (`kategori_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `kategori_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `produk`
@@ -172,20 +155,15 @@ INSERT INTO `produk` (`id`, `kode_produk`, `nama_produk`, `harga`, `stok`, `gamb
 -- Struktur dari tabel `transaksi`
 --
 
-DROP TABLE IF EXISTS `transaksi`;
-CREATE TABLE IF NOT EXISTS `transaksi` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `transaksi` (
+  `id` int(11) NOT NULL,
   `kode_transaksi` varchar(20) NOT NULL,
   `nama_pelanggan` varchar(100) NOT NULL,
   `total_harga` int(11) NOT NULL,
   `tanggal` timestamp NOT NULL DEFAULT current_timestamp(),
   `id_pelanggan` int(11) DEFAULT NULL,
-  `id_operator` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `kode_transaksi` (`kode_transaksi`),
-  UNIQUE KEY `kode_transaksi_2` (`kode_transaksi`),
-  KEY `id_operator` (`id_operator`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_operator` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `transaksi`
@@ -195,6 +173,94 @@ INSERT INTO `transaksi` (`id`, `kode_transaksi`, `nama_pelanggan`, `total_harga`
 (19, 'TRX-20250427-0001', 'aa', 87000, '2025-04-27 05:53:36', NULL, NULL),
 (20, 'TRX-20250517-0020', 'yamyamg', 380000, '2025-05-17 06:52:04', NULL, NULL),
 (21, 'TRX-20250517-0021', 'dani', 148000, '2025-05-17 07:02:24', NULL, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `transaksi_id` (`transaksi_id`),
+  ADD KEY `detail_transaksi_ibfk_2` (`produk_id`);
+
+--
+-- Indeks untuk tabel `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `pengaturan`
+--
+ALTER TABLE `pengaturan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `pengguna`
+--
+ALTER TABLE `pengguna`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Indeks untuk tabel `produk`
+--
+ALTER TABLE `produk`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `kode_produk` (`kode_produk`),
+  ADD KEY `fk_kategori` (`kategori_id`);
+
+--
+-- Indeks untuk tabel `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `kode_transaksi` (`kode_transaksi`),
+  ADD UNIQUE KEY `kode_transaksi_2` (`kode_transaksi`),
+  ADD KEY `id_operator` (`id_operator`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT untuk tabel `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `pengaturan`
+--
+ALTER TABLE `pengaturan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `pengguna`
+--
+ALTER TABLE `pengguna`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `produk`
+--
+ALTER TABLE `produk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksi`
+--
+ALTER TABLE `transaksi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -212,40 +278,6 @@ ALTER TABLE `detail_transaksi`
 --
 ALTER TABLE `produk`
   ADD CONSTRAINT `fk_kategori` FOREIGN KEY (`kategori_id`) REFERENCES `kategori` (`id`);
-
-
---
--- Metadata
---
-USE `phpmyadmin`;
-
---
--- Metadata untuk tabel detail_transaksi
---
-
---
--- Metadata untuk tabel kategori
---
-
---
--- Metadata untuk tabel pengaturan
---
-
---
--- Metadata untuk tabel pengguna
---
-
---
--- Metadata untuk tabel produk
---
-
---
--- Metadata untuk tabel transaksi
---
-
---
--- Metadata untuk database kasir_db
---
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
